@@ -1,7 +1,9 @@
 package Simulator;
 
-import Transit.Line;
+import EventQueue.EventQueue;
+import Main.Losowanie;
 import Transit.Stop;
+import Transit.Tram;
 import Transit.TramLine;
 
 import java.util.Scanner;
@@ -47,7 +49,7 @@ public class Simulator {
             int tramCount = sc.nextInt();
             int length = sc.nextInt();
             Stop[] lineStops = new Stop[length];
-            int[] timeBetweenStops = new int[length];
+            Integer[] timeBetweenStops = new Integer[length];
             for (int j = 0; j < length; j++) {
                 String name = sc.next();
                 int timeBetweenStop = sc.nextInt();
@@ -57,6 +59,15 @@ public class Simulator {
                 }
                 timeBetweenStops[j] = timeBetweenStop;
             }
+
+            TramLine tramLine = new TramLine(i, lineStops, timeBetweenStops);
+            Tram[] trams = new Tram[tramCount];
+            for (int j = 0; j < tramCount; j++) {
+                trams[j] = new Tram(Losowanie.losuj(1, 1000), tramLine, tramCapacity);
+            }
+            tramLine.setTrams(trams);
+
+            tramLines[i] = tramLine;
         }
     }
 
@@ -67,8 +78,9 @@ public class Simulator {
     }
 
     public void simulateDay(int day) {
+        EventQueue eventQueue = new EventQueue();
         for (TramLine tramLine : tramLines) {
-            tramLine.simulateDay(day);
+            tramLine.startSimulation(eventQueue, day);
         }
     }
 }

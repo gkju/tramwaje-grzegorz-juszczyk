@@ -1,24 +1,22 @@
 package Transit;
 
 public class Line {
-    private String name;
     private int number;
     private Stop[] stops;
-    private int[] timeBetweenStops;
+    private Integer[] timeBetweenStops;
 
-    public Line(String name, int number, Stop[] stops, int[] timeBetweenStops) {
-        this.name = name;
+    public Line(int number, Stop[] stops, Integer[] timeBetweenStops) {
         this.number = number;
         this.stops = stops;
         this.timeBetweenStops = timeBetweenStops;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public int getNumber() {
         return number;
+    }
+
+    public Integer[] getTimeBetweenStops() {
+        return timeBetweenStops;
     }
 
     public Stop[] getStops() {
