@@ -3,6 +3,8 @@ package EventQueue;
 import Main.Losowanie;
 import Transit.PassengerWaiting;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.EmptyStackException;
 
 public class RandomHeap<T extends Comparable<T>> {
@@ -10,6 +12,12 @@ public class RandomHeap<T extends Comparable<T>> {
     private int size = 0;
 
     public RandomHeap() {
+
+    }
+
+    public void clear() {
+        size = 0;
+        root = null;
     }
 
     private RandomHeapNode<T> meld(RandomHeapNode<T> a, RandomHeapNode<T> b) {
@@ -23,9 +31,13 @@ public class RandomHeap<T extends Comparable<T>> {
         }
 
         if (Losowanie.losuj(1, 2) <= 1) {
-            a.setLeft(meld(a.getLeft(), b));
+            var res = meld(a.getLeft(), b);
+            res.setParent(a);
+            a.setLeft(res);
         } else {
-            a.setRight(meld(a.getRight(), b));
+            var res = meld(a.getRight(), b);
+            res.setParent(a);
+            a.setRight(res);
         }
         return a;
     }
@@ -68,5 +80,19 @@ public class RandomHeap<T extends Comparable<T>> {
         root = meld(root, meld(node.getLeft(), node.getRight()));
         root.setParent(null);
         size--;
+    }
+
+    // TODO: W javie nie da się zaimplementować własnego wektora, bo nie da się stworzyć array'a generic'a, więc trzeba w generic clasie użyć w jednym miejscu arraylist.
+    private void getNodes(RandomHeapNode<T> node, ArrayList<RandomHeapNode<T>> nodes) {
+        if (node == null) return;
+        nodes.add(node);
+        getNodes(node.getLeft(), nodes);
+        getNodes(node.getRight(), nodes);
+    }
+
+    public ArrayList<RandomHeapNode<T>> getNodes() {
+        ArrayList<RandomHeapNode<T>> nodes = new ArrayList<>(size);
+        getNodes(root, nodes);
+        return nodes;
     }
 }

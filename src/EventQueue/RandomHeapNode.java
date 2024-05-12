@@ -4,7 +4,7 @@ public class RandomHeapNode<T extends Comparable<T>> implements Comparable<Rando
     private T value;
     private RandomHeapNode<T> left;
     private RandomHeapNode<T> right;
-    private RandomHeapNode<T> parent;
+    private RandomHeapNode<T> parent = null;
 
     public RandomHeapNode(T value) {
         this.value = value;

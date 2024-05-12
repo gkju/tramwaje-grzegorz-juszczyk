@@ -19,4 +19,8 @@ public class EventQueue implements IEventQueue {
     public Event popNext() {
         return heap.popMin().getValue();
     }
+
+    public int size() {
+        return heap.getSize();
+    }
 }

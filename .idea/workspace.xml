@@ -5,11 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c2ba0a6-da87-4c94-bcb3-7dbe8134b358" name="Changes" comment="Tram events">
-      <change afterPath="$PROJECT_DIR$/src/Transit/Direction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Utils/Utils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/EventQueue/Vector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Events/HalfwayStopArrivalEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Logging/ConsoleLogger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Logging/Logger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventQueue/EventQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventQueue/EventQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventQueue/IEventQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventQueue/IEventQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventQueue/RandomHeap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventQueue/RandomHeap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventQueue/RandomHeapNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventQueue/RandomHeapNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Events/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Events/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Events/PassengerArrivalEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Events/PassengerArrivalEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Events/StopArrivalEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Events/StopArrivalEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Events/TerminalStopArrivalEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Events/TerminalStopArrivalEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Simulator/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Simulator/Simulator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Transit/Line.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transit/Line.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Transit/Passenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transit/Passenger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Transit/PassengerWaiting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transit/PassengerWaiting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Transit/Stop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transit/Stop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Transit/Tram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transit/Tram.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Transit/TramLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transit/TramLine.java" afterDir="false" />
     </list>
@@ -30,18 +44,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "gkju"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;gkju&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/gkju/tramwaje-grzegorz-juszczyk.git",
-    "accountId": "07972cef-1b8b-4561-a9cc-eb472d95c0d2"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/gkju/tramwaje-grzegorz-juszczyk.git&quot;,
+    &quot;accountId&quot;: &quot;07972cef-1b8b-4561-a9cc-eb472d95c0d2&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -54,6 +68,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "Application.Unnamed.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
@@ -67,6 +82,15 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Main.Main" />
+      <module name="tramwaje" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -84,7 +108,8 @@
       <option name="presentableId" value="Default" />
       <updated>1715430165679</updated>
       <workItem from="1715430166917" duration="225000" />
-      <workItem from="1715430399108" duration="12040000" />
+      <workItem from="1715430399108" duration="23959000" />
+      <workItem from="1715539391488" duration="4155000" />
     </task>
     <task id="LOCAL-00001" summary="Prep work">
       <option name="closed" value="true" />
@@ -94,7 +119,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715449052171</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Tram events">
+      <option name="closed" value="true" />
+      <created>1715457340049</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1715457340049</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -104,6 +137,21 @@
     <MESSAGE value="Prep work" />
     <MESSAGE value="Tram events" />
     <option name="LAST_COMMIT_MESSAGE" value="Tram events" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Transit/Tram.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

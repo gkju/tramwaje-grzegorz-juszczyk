@@ -17,18 +17,18 @@ public class TramLine extends Line {
 
     public void startSimulation(EventQueue queue, int day) {
         int tramCnt = trams.length;
-        // Mamy 16 godzin po 60 minut, w trakcie których
-        int delayBetweenTrams = 16 * 60 / (tramCnt / 2);
+        // Mamy 17 godzin po 60 minut, w trakcie których może odjechać tramwaj.
+        int delayBetweenTrams = 17 * 60 / (tramCnt / 2);
 
-        Date currentDepartureTime = new Date(day, 0, day, 6, 0);
+        Date currentDepartureTime = new Date(0, 0, day, 6, 0);
         for (int i = 0; i < tramCnt; i += 2) {
-            trams[i].generateEvents(queue, currentDepartureTime, Direction.CLOCKWISE);
+            trams[i].generateEvents(queue, currentDepartureTime);
 
             if(i + 1 < tramCnt) {
-                trams[i + 1].generateEvents(queue, currentDepartureTime, Direction.COUNTERCLOCKWISE);
+                trams[i + 1].generateEvents(queue, currentDepartureTime);
             }
 
-            currentDepartureTime.setMinutes(currentDepartureTime.getMinutes() + delayBetweenTrams);
+            currentDepartureTime = new Date(currentDepartureTime.getTime() + delayBetweenTrams * 60 * 1000);
         }
     }
 }

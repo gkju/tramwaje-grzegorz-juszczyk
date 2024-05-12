@@ -22,4 +22,9 @@ public class Line {
     public Stop[] getStops() {
         return stops;
     }
+
+    public Integer getTimeAtTerminalStop() {
+        return timeBetweenStops[timeBetweenStops.length - 1];
+    }
+
 }

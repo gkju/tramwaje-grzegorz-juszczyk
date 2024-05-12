@@ -11,6 +11,14 @@ public class PassengerWaiting implements Comparable<PassengerWaiting> {
         this.passenger = passenger;
     }
 
+    public Passenger getPassenger() {
+        return passenger;
+    }
+
+    public Date getStartedWaitingAt() {
+        return startedWaitingAt;
+    }
+
     @Override
     public int compareTo(PassengerWaiting o) {
         return startedWaitingAt.compareTo(o.startedWaitingAt);

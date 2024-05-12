@@ -14,4 +14,12 @@ public class PassengerArrivalEvent extends Event {
         this.stop = stop;
         this.passenger = passenger;
     }
+
+    public Stop getStop() {
+        return stop;
+    }
+
+    public Passenger getPassenger() {
+        return passenger;
+    }
 }
