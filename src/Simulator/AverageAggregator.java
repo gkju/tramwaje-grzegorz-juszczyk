@@ -20,4 +20,8 @@ public class AverageAggregator {
         }
         return sum / count;
     }
+
+    public int getCount() {
+        return count;
+    }
 }

@@ -35,4 +35,6 @@ public abstract class Logger {
     public abstract void logFinalStats(Simulator simulator);
 
     public abstract void logDayStats(Simulator simulator, Event event);
+
+    public abstract void logPassengerFailedToStayAtStop(Passenger passenger, Stop stop, PassengerArrivalEvent event);
 }

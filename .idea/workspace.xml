@@ -4,17 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c2ba0a6-da87-4c94-bcb3-7dbe8134b358" name="Changes" comment="Add logging">
-      <change afterPath="$PROJECT_DIR$/src/EventQueue/PassengerWaitingHeapNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/EventQueue/PassengerWaitingRandomHeap.java" afterDir="false" />
+    <list default="true" id="7c2ba0a6-da87-4c94-bcb3-7dbe8134b358" name="Changes" comment="Conform to spec">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EventQueue/RandomHeap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventQueue/RandomHeap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventQueue/RandomHeapNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventQueue/RandomHeapNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Logging/ConsoleLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Logging/ConsoleLogger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Logging/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Logging/Logger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Simulator/AverageAggregator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Simulator/AverageAggregator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Simulator/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Simulator/Simulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Transit/Passenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transit/Passenger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Transit/Tram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transit/Tram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Transit/TramLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transit/TramLine.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +96,7 @@
       <updated>1715430165679</updated>
       <workItem from="1715430166917" duration="225000" />
       <workItem from="1715430399108" duration="23959000" />
-      <workItem from="1715539391488" duration="9180000" />
+      <workItem from="1715539391488" duration="11263000" />
     </task>
     <task id="LOCAL-00001" summary="Prep work">
       <option name="closed" value="true" />
@@ -124,7 +122,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715543597753</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Conform to spec">
+      <option name="closed" value="true" />
+      <created>1715548655497</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1715548655497</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,7 +140,8 @@
     <MESSAGE value="Prep work" />
     <MESSAGE value="Tram events" />
     <MESSAGE value="Add logging" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add logging" />
+    <MESSAGE value="Conform to spec" />
+    <option name="LAST_COMMIT_MESSAGE" value="Conform to spec" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

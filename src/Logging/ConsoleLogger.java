@@ -73,7 +73,9 @@ public class ConsoleLogger extends Logger {
         System.out.printf("--------------Statystyki dla całej symulacji--------------\n");
         System.out.printf("Łącznie odbyło się %d przejazdów\n", simulator.getTotalTrips());
         System.out.printf("Średni czas oczekiwania na przystanku wynosił %f minut\n", simulator.getAverageWaitTime().getAverage());
+        System.out.printf("Czekano na przystankach łącznie %d razy\n", simulator.getAverageWaitTime().getCount());
         System.out.printf("Średni czas przejazdu wynosił %f minut\n", simulator.getAverageTripTime().getAverage());
+        System.out.printf("Nie udało się podróżować %d pasażerom\n", simulator.getFailedTrips());
 
         System.out.print(dayStats.toString());
     }
@@ -86,5 +88,22 @@ public class ConsoleLogger extends Logger {
         prompt = String.format("Dnia %d odbyło się %d przejazdów i czekano %d minut na przystankach.\n", event.getDate().getDate(), simulator.getDayTrips(), simulator.getDayWaitTime());
         System.out.printf(prompt);
         dayStats.append(prompt);
+        prompt = String.format("Średni czas oczekiwania na przystanku wynosił %f minut\n", simulator.getLastDayAverageWaitTime().getAverage());
+        System.out.printf(prompt);
+        dayStats.append(prompt);
+        prompt = String.format("Czekano na przystankach łącznie %d razy\n", simulator.getLastDayAverageWaitTime().getCount());
+        System.out.printf(prompt);
+        dayStats.append(prompt);
+        prompt = String.format("Średni czas przejazdu wynosił %f minut\n", simulator.getLastDayAverageTripTime().getAverage());
+        System.out.printf(prompt);
+        dayStats.append(prompt);
+        prompt = String.format("Nie udało się podróżować %d pasażerom\n", simulator.getFailedTrips());
+        System.out.printf(prompt);
+        dayStats.append(prompt);
+    }
+
+    @Override
+    public void logPassengerFailedToStayAtStop(Passenger passenger, Stop stop, PassengerArrivalEvent event) {
+        System.out.printf("%d, %02d:%02d: Pasażer %s nie dał rady przyjść na przystanek %s\n", event.getDate().getDate(), event.getDate().getHours(), event.getDate().getMinutes(), passenger.getName(), stop.getName());
     }
 }

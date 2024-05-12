@@ -21,9 +21,13 @@ public class Simulator {
     private TramLine[] tramLines;
     private AverageAggregator averageWaitTime = new AverageAggregator();
     private AverageAggregator averageTripTime = new AverageAggregator();
+    private AverageAggregator lastDayAverageWaitTime = new AverageAggregator();
+    private AverageAggregator lastDayAverageTripTime = new AverageAggregator();
     private int totalTrips = 0;
     private Passenger[] passengers;
     private ConsoleLogger logger = new ConsoleLogger();
+    private int failedTrips = 0;
+    private int lastDayFailedTrips = 0;
 
     public Simulator() {
     }
@@ -92,6 +96,22 @@ public class Simulator {
         return averageTripTime;
     }
 
+    public AverageAggregator getLastDayAverageTripTime() {
+        return lastDayAverageTripTime;
+    }
+
+    public AverageAggregator getLastDayAverageWaitTime() {
+        return lastDayAverageWaitTime;
+    }
+
+    public int getLastDayFailedTrips() {
+        return lastDayFailedTrips;
+    }
+
+    public int getFailedTrips() {
+        return failedTrips;
+    }
+
     public void simulate() {
         logger.logSimulationData(this);
         for (int i = 1; i <= simulationDuration; i++) {
@@ -106,6 +126,9 @@ public class Simulator {
     public void simulateDay(int day) {
         lastDayTripsCount = 0;
         lastDayWaitingTimeSum = 0;
+        lastDayFailedTrips = 0;
+        lastDayAverageWaitTime = new AverageAggregator();
+        lastDayAverageTripTime = new AverageAggregator();
 
         EventQueue eventQueue = new EventQueue();
         for (TramLine tramLine : tramLines) {
@@ -134,7 +157,7 @@ public class Simulator {
 
         var midnight = new Date(0, 0, day, 24, 0);
         for(var stop : stops) {
-            // Gdyby liczyć osoby, które nie doczekały się przejazdu tramwajem, to należałoby, to odkomentować.
+            // Gdyby liczyć osoby, które nie doczekały się przejazdu tramwajem, to należałoby, to odkomentować, stąd w statystykach jest rubryka na uwzględnienie tego.
             //while(!stop.isEmpty()) {
             //    var passenger = stop.popEldestPassenger();
             //    averageWaitTime.add(((double) (midnight.getTime() - passenger.getStartedWaitingAt().getTime())) / (60.0 * 1000.0));
@@ -154,6 +177,10 @@ public class Simulator {
         if(!stop.isFull()) {
             stop.addPassenger(passenger, event.getDate());
             logger.logPassengerArrivedAtStop(passenger, stop, event);
+        } else {
+            ++failedTrips;
+            ++lastDayFailedTrips;
+            logger.logPassengerFailedToStayAtStop(passenger, stop, event);
         }
     }
 
@@ -178,7 +205,6 @@ public class Simulator {
         var tram = event.getTram();
         var timeToLeave = new Date(timeArrived.getTime() + tram.getLine().getTimeAtTerminalStop() * 60 * 1000);
         if(timeToLeave.getHours() == 23 || timeToLeave.getDate() != day) {
-            // TODO: wykopywanie wszystkich na pętle
             tram.clearPassengers(logger, event);
             return;
         }
@@ -195,8 +221,10 @@ public class Simulator {
 
         while (!tram.isFull() && !stop.isEmpty()) {
             var newPassenger = stop.popEldestPassenger();
-            lastDayWaitingTimeSum += (int) (((double) (event.getDate().getTime() - newPassenger.getStartedWaitingAt().getTime())) / (60.0 * 1000.0));
-            averageWaitTime.add(((double) (event.getDate().getTime() - newPassenger.getStartedWaitingAt().getTime())) / (60.0 * 1000.0));
+            double waitTime = ((double) (event.getDate().getTime() - newPassenger.getStartedWaitingAt().getTime())) / (60.0 * 1000.0);
+            lastDayWaitingTimeSum += (int) waitTime;
+            averageWaitTime.add(waitTime);
+            lastDayAverageWaitTime.add(waitTime);
             tram.insertPassengerAndChooseStop(newPassenger.getPassenger(), event.getDate(), event);
             ++lastDayTripsCount;
             ++totalTrips;
@@ -208,7 +236,9 @@ public class Simulator {
 
     private void finalizeDumpingPassengers(StopArrivalEvent event, Vector<Passenger> passengersWhoLeft, Stop stop) {
         for (Passenger passenger : passengersWhoLeft.toArray()) {
-            averageTripTime.add(((double) (event.getDate().getTime() - passenger.getEnteredTramAt().getTime())) / (1000.0 * 60.0));
+            double tripTime = ((double) (event.getDate().getTime() - passenger.getEnteredTramAt().getTime())) / (1000.0 * 60.0);
+            averageTripTime.add(tripTime);
+            lastDayAverageTripTime.add(tripTime);
             logger.logPassengerLeftTram(passenger, event, stop);
             stop.addPassenger(passenger, event.getDate());
         }

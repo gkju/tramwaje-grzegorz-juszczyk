@@ -1,6 +1,5 @@
 package Transit;
 
-import java.util.ArrayList;
 import java.util.Date;
 import EventQueue.EventQueue;
 import Events.Event;

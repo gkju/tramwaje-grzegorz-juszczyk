@@ -1,10 +1,6 @@
 package EventQueue;
 
 import Main.Losowanie;
-import Transit.PassengerWaiting;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.EmptyStackException;
 
 public class RandomHeap<T extends Comparable<T>> {

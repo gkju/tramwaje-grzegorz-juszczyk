@@ -15,10 +15,18 @@ public class TramLine extends Line {
         this.trams = trams;
     }
 
+    public int getTotalDuration() {
+        int totalDuration = 0;
+        for (int time : getTimeBetweenStops()) {
+            totalDuration += time;
+        }
+        return totalDuration;
+    }
+
     public void startSimulation(EventQueue queue, int day) {
         int tramCnt = trams.length;
         // Mamy 17 godzin po 60 minut, w trakcie których może odjechać tramwaj.
-        int delayBetweenTrams = 17 * 60 / (tramCnt / 2);
+        long delayBetweenTrams = (2L * getTotalDuration()) / tramCnt;
 
         Date currentDepartureTime = new Date(0, 0, day, 6, 0);
         for (int i = 0; i < tramCnt; i += 2) {
