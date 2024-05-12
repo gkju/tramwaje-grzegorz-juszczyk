@@ -4,28 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c2ba0a6-da87-4c94-bcb3-7dbe8134b358" name="Changes" comment="Tram events">
-      <change afterPath="$PROJECT_DIR$/src/EventQueue/Vector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Events/HalfwayStopArrivalEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Logging/ConsoleLogger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Logging/Logger.java" afterDir="false" />
+    <list default="true" id="7c2ba0a6-da87-4c94-bcb3-7dbe8134b358" name="Changes" comment="Add logging">
+      <change afterPath="$PROJECT_DIR$/src/EventQueue/PassengerWaitingHeapNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/EventQueue/PassengerWaitingRandomHeap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventQueue/EventQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventQueue/EventQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventQueue/IEventQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventQueue/IEventQueue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EventQueue/RandomHeap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventQueue/RandomHeap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EventQueue/RandomHeapNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventQueue/RandomHeapNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Events/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Events/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Events/PassengerArrivalEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Events/PassengerArrivalEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Events/StopArrivalEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Events/StopArrivalEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Events/TerminalStopArrivalEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Events/TerminalStopArrivalEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Logging/ConsoleLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Logging/ConsoleLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Logging/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Logging/Logger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Simulator/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Simulator/Simulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Transit/Line.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transit/Line.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Transit/Passenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transit/Passenger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Transit/PassengerWaiting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transit/PassengerWaiting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Transit/Stop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transit/Stop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Transit/Tram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transit/Tram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Transit/TramLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transit/TramLine.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +98,7 @@
       <updated>1715430165679</updated>
       <workItem from="1715430166917" duration="225000" />
       <workItem from="1715430399108" duration="23959000" />
-      <workItem from="1715539391488" duration="4155000" />
+      <workItem from="1715539391488" duration="9180000" />
     </task>
     <task id="LOCAL-00001" summary="Prep work">
       <option name="closed" value="true" />
@@ -127,7 +116,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715457340049</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add logging">
+      <option name="closed" value="true" />
+      <created>1715543597753</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1715543597753</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,7 +133,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Prep work" />
     <MESSAGE value="Tram events" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tram events" />
+    <MESSAGE value="Add logging" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add logging" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -145,11 +143,6 @@
           <properties class="java.lang.IllegalArgumentException" package="java.lang" />
           <option name="timeStamp" value="3" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Transit/Tram.java</url>
-          <line>81</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

@@ -12,14 +12,16 @@ import Main.Losowanie;
 import Utils.Utils;
 import EventQueue.RandomHeap;
 import EventQueue.RandomHeapNode;
+import EventQueue.PassengerWaitingRandomHeap;
 import EventQueue.Vector;
+import EventQueue.PassengerWaitingHeapNode;
 
 public class Tram {
     private int serialNumber;
     private TramLine line;
     private int capacity;
     private Direction direction;
-    private RandomHeap<PassengerWaiting> passengers = new RandomHeap<PassengerWaiting>();
+    private PassengerWaitingRandomHeap passengers = new PassengerWaitingRandomHeap();
 
     public Tram(int serialNumber, TramLine line, int capacity, Direction direction) {
         this.serialNumber = serialNumber;
@@ -118,7 +120,7 @@ public class Tram {
         }
         passenger.setDestinationStop(stops[nextStopIndex]);
         passenger.setEnteredTramAt(event.getDate());
-        passengers.insert(new RandomHeapNode<>(new PassengerWaiting(date, passenger)));
+        passengers.insert(new PassengerWaitingHeapNode(new PassengerWaiting(date, passenger)));
     }
 
     public Direction getDirection() {
@@ -129,7 +131,7 @@ public class Tram {
         return passengers.getSize() >= capacity;
     }
 
-    public ArrayList<RandomHeapNode<PassengerWaiting>> getPassengers() {
+    public PassengerWaitingHeapNode[] getPassengers() {
         return passengers.getNodes();
     }
 
@@ -137,7 +139,7 @@ public class Tram {
         return passengers.getSize();
     }
 
-    public void removePassenger(RandomHeapNode<PassengerWaiting> passengerNode) {
+    public void removePassenger(PassengerWaitingHeapNode passengerNode) {
         passengers.delete(passengerNode);
     }
 

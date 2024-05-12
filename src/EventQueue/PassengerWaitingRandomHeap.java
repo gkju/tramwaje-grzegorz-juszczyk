@@ -3,15 +3,14 @@ package EventQueue;
 import Main.Losowanie;
 import Transit.PassengerWaiting;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.EmptyStackException;
 
-public class RandomHeap<T extends Comparable<T>> {
-    protected RandomHeapNode<T> root = null;
+// Ponieważ w javie niemożliwe jest tworzenie generic array (do tego są zakazane arraylisty) muszę explicite'a tworzyć wyspecjalizowaną kopię
+public class PassengerWaitingRandomHeap {
+    protected PassengerWaitingHeapNode root = null;
     private int size = 0;
 
-    public RandomHeap() {
+    public PassengerWaitingRandomHeap() {
 
     }
 
@@ -20,7 +19,7 @@ public class RandomHeap<T extends Comparable<T>> {
         root = null;
     }
 
-    private RandomHeapNode<T> meld(RandomHeapNode<T> a, RandomHeapNode<T> b) {
+    private PassengerWaitingHeapNode meld(PassengerWaitingHeapNode a, PassengerWaitingHeapNode b) {
         if(a == null) return b;
         if(b == null) return a;
 
@@ -42,13 +41,13 @@ public class RandomHeap<T extends Comparable<T>> {
         return a;
     }
 
-    public void insert(RandomHeapNode<T> node) {
+    public void insert(PassengerWaitingHeapNode node) {
         root = meld(root, node);
         root.setParent(null);
         size++;
     }
 
-    public RandomHeapNode<T> findMin() {
+    public PassengerWaitingHeapNode findMin() {
         return root;
     }
 
@@ -56,7 +55,7 @@ public class RandomHeap<T extends Comparable<T>> {
         return size;
     }
 
-    public RandomHeapNode<T> popMin() {
+    public PassengerWaitingHeapNode popMin() {
         if (root == null) throw new EmptyStackException();
         var min = root;
         root = meld(root.getLeft(), root.getRight());
@@ -65,7 +64,7 @@ public class RandomHeap<T extends Comparable<T>> {
         return min;
     }
 
-    public void delete(RandomHeapNode<T> node) {
+    public void delete(PassengerWaitingHeapNode node) {
         if (node == null) return;
         if (node == root) {
             popMin();
@@ -82,19 +81,16 @@ public class RandomHeap<T extends Comparable<T>> {
         size--;
     }
 
-    /*
-    // TODO: W javie nie da się zaimplementować własnego wektora, bo nie da się stworzyć array'a generic'a, więc trzeba w generic clasie użyć w jednym miejscu arraylist.
-    private void getNodes(RandomHeapNode<T> node, TuBylbyAL<RandomHeapNode<T>> nodes) {
+    private void getNodes(PassengerWaitingHeapNode node, Vector<PassengerWaitingHeapNode> nodes) {
         if (node == null) return;
-        nodes.add(node);
+        nodes.pushBack(node);
         getNodes(node.getLeft(), nodes);
         getNodes(node.getRight(), nodes);
     }
 
-    public TuBylbyAL<RandomHeapNode<T>> getNodes() {
-        TuBylbyAL<RandomHeapNode<T>> nodes = new ArrayList<>(size);
-        getNodes(root, nodes);
-        return nodes;
+    public PassengerWaitingHeapNode[] getNodes() {
+        Vector<PassengerWaitingHeapNode> passengerWaitingVector = new Vector<>(PassengerWaitingHeapNode[].class);
+        getNodes(root, passengerWaitingVector);
+        return passengerWaitingVector.toArray();
     }
-     */
 }

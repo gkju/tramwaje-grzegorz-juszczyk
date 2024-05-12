@@ -3,6 +3,7 @@ package Transit;
 import EventQueue.EventQueue;
 import EventQueue.RandomHeapNode;
 import Events.PassengerArrivalEvent;
+import EventQueue.PassengerWaitingHeapNode;
 import Main.Losowanie;
 
 import java.util.Date;
@@ -34,7 +35,7 @@ public class Passenger {
         return destinationStop;
     }
 
-    public boolean exitTram(Stop stop, RandomHeapNode<PassengerWaiting> node, Tram tram) {
+    public boolean exitTram(Stop stop, PassengerWaitingHeapNode node, Tram tram) {
         tram.removePassenger(node);
         return true;
     }

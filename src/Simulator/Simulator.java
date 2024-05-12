@@ -20,6 +20,7 @@ public class Simulator {
     private int lineCount = 0;
     private TramLine[] tramLines;
     private AverageAggregator averageWaitTime = new AverageAggregator();
+    private AverageAggregator averageTripTime = new AverageAggregator();
     private int totalTrips = 0;
     private Passenger[] passengers;
     private ConsoleLogger logger = new ConsoleLogger();
@@ -69,7 +70,7 @@ public class Simulator {
             TramLine tramLine = new TramLine(i, lineStops, timeBetweenStops);
             Tram[] trams = new Tram[tramCount];
             for (int j = 0; j < tramCount; j++) {
-                trams[j] = new Tram(++lastCreatedTramNo, tramLine, tramCapacity, j % 2 == 0 ? Direction.CLOCKWISE : Direction.COUNTERCLOCKWISE);
+                trams[j] = new Tram(lastCreatedTramNo++, tramLine, tramCapacity, j % 2 == 0 ? Direction.CLOCKWISE : Direction.COUNTERCLOCKWISE);
             }
             tramLine.setTrams(trams);
 
@@ -87,15 +88,25 @@ public class Simulator {
         return averageWaitTime;
     }
 
+    public AverageAggregator getAverageTripTime() {
+        return averageTripTime;
+    }
+
     public void simulate() {
         logger.logSimulationData(this);
-        for (int i = 0; i < simulationDuration; i++) {
+        for (int i = 1; i <= simulationDuration; i++) {
             simulateDay(i);
         }
         logger.logFinalStats(this);
     }
 
+    private int lastDayTripsCount = 0;
+    private int lastDayWaitingTimeSum = 0;
+
     public void simulateDay(int day) {
+        lastDayTripsCount = 0;
+        lastDayWaitingTimeSum = 0;
+
         EventQueue eventQueue = new EventQueue();
         for (TramLine tramLine : tramLines) {
             tramLine.startSimulation(eventQueue, day);
@@ -121,8 +132,18 @@ public class Simulator {
             }
         }
 
+        var midnight = new Date(0, 0, day, 24, 0);
         for(var stop : stops) {
+            // Gdyby liczyć osoby, które nie doczekały się przejazdu tramwajem, to należałoby, to odkomentować.
+            //while(!stop.isEmpty()) {
+            //    var passenger = stop.popEldestPassenger();
+            //    averageWaitTime.add(((double) (midnight.getTime() - passenger.getStartedWaitingAt().getTime())) / (60.0 * 1000.0));
+            //}
             stop.clearPassengers(logger, lastEvent);
+        }
+
+        if(lastEvent != null) {
+            logger.logDayStats(this, lastEvent);
         }
     }
 
@@ -130,7 +151,10 @@ public class Simulator {
         var stop = event.getStop();
         var passenger = event.getPassenger();
 
-        stop.addPassenger(passenger, event.getDate());
+        if(!stop.isFull()) {
+            stop.addPassenger(passenger, event.getDate());
+            logger.logPassengerArrivedAtStop(passenger, stop, event);
+        }
     }
 
     private void dumpPassengers(StopArrivalEvent event) {
@@ -153,7 +177,7 @@ public class Simulator {
         var timeArrived = event.getDate();
         var tram = event.getTram();
         var timeToLeave = new Date(timeArrived.getTime() + tram.getLine().getTimeAtTerminalStop() * 60 * 1000);
-        if(timeToLeave.getHours() == 23 || timeToLeave.getDay() != day) {
+        if(timeToLeave.getHours() == 23 || timeToLeave.getDate() != day) {
             // TODO: wykopywanie wszystkich na pętle
             tram.clearPassengers(logger, event);
             return;
@@ -171,8 +195,10 @@ public class Simulator {
 
         while (!tram.isFull() && !stop.isEmpty()) {
             var newPassenger = stop.popEldestPassenger();
+            lastDayWaitingTimeSum += (int) (((double) (event.getDate().getTime() - newPassenger.getStartedWaitingAt().getTime())) / (60.0 * 1000.0));
             averageWaitTime.add(((double) (event.getDate().getTime() - newPassenger.getStartedWaitingAt().getTime())) / (60.0 * 1000.0));
             tram.insertPassengerAndChooseStop(newPassenger.getPassenger(), event.getDate(), event);
+            ++lastDayTripsCount;
             ++totalTrips;
             logger.logPassengerTramBoarding(newPassenger.getPassenger(), tram, event);
         }
@@ -182,6 +208,7 @@ public class Simulator {
 
     private void finalizeDumpingPassengers(StopArrivalEvent event, Vector<Passenger> passengersWhoLeft, Stop stop) {
         for (Passenger passenger : passengersWhoLeft.toArray()) {
+            averageTripTime.add(((double) (event.getDate().getTime() - passenger.getEnteredTramAt().getTime())) / (1000.0 * 60.0));
             logger.logPassengerLeftTram(passenger, event, stop);
             stop.addPassenger(passenger, event.getDate());
         }
@@ -217,5 +244,13 @@ public class Simulator {
 
     public int getTotalTrips() {
         return totalTrips;
+    }
+
+    public int getDayWaitTime() {
+        return lastDayWaitingTimeSum;
+    }
+
+    public int getDayTrips() {
+        return lastDayTripsCount;
     }
 }

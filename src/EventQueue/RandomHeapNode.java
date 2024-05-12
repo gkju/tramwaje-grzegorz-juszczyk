@@ -1,10 +1,10 @@
 package EventQueue;
 
 public class RandomHeapNode<T extends Comparable<T>> implements Comparable<RandomHeapNode<T>> {
-    private T value;
-    private RandomHeapNode<T> left;
-    private RandomHeapNode<T> right;
-    private RandomHeapNode<T> parent = null;
+    protected T value;
+    protected RandomHeapNode<T> left;
+    protected RandomHeapNode<T> right;
+    protected RandomHeapNode<T> parent = null;
 
     public RandomHeapNode(T value) {
         this.value = value;
